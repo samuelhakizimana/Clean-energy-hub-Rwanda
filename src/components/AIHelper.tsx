@@ -84,33 +84,33 @@ export const AIHelper = ({ state, setState }: AIHelperProps) => {
   };
 
   return (
-    <div className="h-[calc(100vh-12rem)] flex flex-col gap-6 animate-in fade-in duration-500">
+    <div className="h-[calc(100vh-8rem)] md:h-[calc(100vh-12rem)] flex flex-col gap-4 md:gap-6 animate-in fade-in duration-500">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <Sparkles className="text-[#00A1DE]" size={24} /> AI Energy Advisor
+          <h1 className="text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-2">
+            <Sparkles className="text-[#00A1DE]" size={20} /> AI Energy Advisor
           </h1>
-          <p className="text-sm text-gray-500 font-medium">Personalized recommendations based on real-time market data.</p>
+          <p className="text-xs md:text-sm text-gray-500 font-medium">Personalized recommendations based on real-time market data.</p>
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col lg:flex-row gap-6 min-h-0">
+      <div className="flex-1 flex flex-col lg:flex-row gap-4 md:gap-6 min-h-0">
         {/* Chat Area */}
-        <Card className="flex-1 flex flex-col border-none shadow-sm overflow-hidden">
-          <CardContent className="flex-1 overflow-y-auto p-6 space-y-6" ref={scrollRef}>
+        <Card className="flex-1 flex flex-col border-none shadow-sm overflow-hidden min-h-[400px]">
+          <CardContent className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 md:space-y-6" ref={scrollRef}>
             {messages.map((msg, i) => (
               <div key={i} className={cn(
-                "flex gap-4 max-w-[85%]",
+                "flex gap-3 md:gap-4 max-w-[90%] md:max-w-[85%]",
                 msg.role === 'user' ? "ml-auto flex-row-reverse" : ""
               )}>
                 <div className={cn(
-                  "w-8 h-8 rounded-lg flex items-center justify-center shrink-0",
+                  "w-7 h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center shrink-0",
                   msg.role === 'assistant' ? "bg-[#00A1DE] text-white" : "bg-gray-100 text-gray-500"
                 )}>
-                  {msg.role === 'assistant' ? <Bot size={18} /> : <User size={18} />}
+                  {msg.role === 'assistant' ? <Bot size={16} /> : <User size={16} />}
                 </div>
                 <div className={cn(
-                  "p-4 rounded-2xl text-sm leading-relaxed",
+                  "p-3 md:p-4 rounded-2xl text-sm leading-relaxed",
                   msg.role === 'assistant' ? "bg-gray-50 text-gray-800 rounded-tl-none" : "bg-[#00A1DE] text-white rounded-tr-none"
                 )}>
                   {msg.content}
@@ -118,26 +118,26 @@ export const AIHelper = ({ state, setState }: AIHelperProps) => {
               </div>
             ))}
             {isLoading && (
-              <div className="flex gap-4 max-w-[85%]">
-                <div className="w-8 h-8 rounded-lg bg-[#00A1DE] text-white flex items-center justify-center shrink-0">
-                  <Bot size={18} />
+              <div className="flex gap-3 md:gap-4 max-w-[90%] md:max-w-[85%]">
+                <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-[#00A1DE] text-white flex items-center justify-center shrink-0">
+                  <Bot size={16} />
                 </div>
-                <div className="p-4 rounded-2xl bg-gray-50 text-gray-400 rounded-tl-none flex items-center gap-2">
-                  <Loader2 size={16} className="animate-spin" />
-                  Thinking...
+                <div className="p-3 md:p-4 rounded-2xl bg-gray-50 text-gray-400 rounded-tl-none flex items-center gap-2">
+                  <Loader2 size={14} className="animate-spin" />
+                  <span className="text-sm">Thinking...</span>
                 </div>
               </div>
             )}
           </CardContent>
-          <div className="p-4 border-t border-gray-100 bg-white">
+          <div className="p-3 md:p-4 border-t border-gray-100 bg-white sticky bottom-0">
             <div className="relative flex items-center gap-2">
               <input 
                 type="text"
-                placeholder="Ask about solar kits, LPG prices, or energy savings..."
+                placeholder="Ask about solar, LPG, or savings..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                className="flex-1 pl-4 pr-12 py-3 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-[#00A1DE] transition-all text-sm"
+                className="flex-1 pl-4 pr-12 py-3.5 md:py-3 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-[#00A1DE] transition-all text-base md:text-sm"
               />
               <Button 
                 onClick={handleSend}
@@ -151,15 +151,15 @@ export const AIHelper = ({ state, setState }: AIHelperProps) => {
         </Card>
 
         {/* Info Sidebar */}
-        <div className="w-full lg:w-80 space-y-6">
+        <div className="w-full lg:w-80 space-y-4 md:space-y-6 pb-4 lg:pb-0">
           <Card className="border-none shadow-sm bg-[#141414] text-white">
-            <CardHeader className="border-b border-white/10">
-              <h3 className="font-bold flex items-center gap-2">
+            <CardHeader className="border-b border-white/10 p-4 md:p-6">
+              <h3 className="font-bold flex items-center gap-2 text-sm md:text-base">
                 <BrainCircuit size={18} className="text-[#00A1DE]" /> Advisor Intelligence
               </h3>
             </CardHeader>
-            <CardContent className="p-6 space-y-4">
-              <p className="text-xs text-gray-400 leading-relaxed">
+            <CardContent className="p-4 md:p-6 space-y-4">
+              <p className="text-[11px] md:text-xs text-gray-400 leading-relaxed">
                 I analyze your profile against the latest REG tariffs and fuel prices to provide the most accurate financial advice.
               </p>
               <div className="space-y-3">
@@ -178,7 +178,7 @@ export const AIHelper = ({ state, setState }: AIHelperProps) => {
                     language: prev.language, 
                     activeView: 'dashboard' 
                   }))}
-                  className="w-full border-white/10 text-white hover:bg-white/5 text-xs h-9"
+                  className="w-full border-white/10 text-white hover:bg-white/5 text-[11px] md:text-xs h-9"
                 >
                   Renew My Data
                 </Button>
@@ -186,7 +186,7 @@ export const AIHelper = ({ state, setState }: AIHelperProps) => {
             </CardContent>
           </Card>
 
-          <Card className="border-none shadow-sm">
+          <Card className="border-none shadow-sm hidden md:block">
             <CardContent className="p-6 space-y-4">
               <h4 className="font-bold text-gray-900">Suggested Questions</h4>
               <div className="space-y-2">
@@ -207,6 +207,24 @@ export const AIHelper = ({ state, setState }: AIHelperProps) => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Mobile Suggested Questions (Horizontal Scroll) */}
+          <div className="md:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            {[
+              "LPG vs Charcoal?",
+              "Solar savings?",
+              "Pellets in Kigali?",
+              "Best EPC?"
+            ].map((q, i) => (
+              <button 
+                key={i}
+                onClick={() => setInput(q)}
+                className="whitespace-nowrap px-4 py-2 bg-white border border-gray-100 rounded-full text-xs font-bold text-gray-500 hover:text-[#00A1DE] shadow-sm"
+              >
+                {q}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
